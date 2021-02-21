@@ -13,6 +13,7 @@ function showWeather() {
 
     xhrObj.send();
 }
+// my weather app
 
 function displayWeather(resp) {
     const userEmail = document.getElementById("user-email");
