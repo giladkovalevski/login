@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <fieldset>
+        <legend>Login</legend>
+        <!-- <form> -->
+            <label for="user-email">Email Address</label><br>
+            <input type="email" id="user-email" name="user-email" required><br>
+            <label for="user-password">Password</label><br>
+            <input type="password" id="user-password" name="user-password" minlength="6" required><br><br>
+            <button onclick="showWeather()">Login &#x27A1;</button>
+            <br><br>
+
+            <div id="weather-container">
+            
+            </div>
+
+            <div id="message-date-time-container">
+
+            </div>
+        <!-- </form> -->
+    </fieldset>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
