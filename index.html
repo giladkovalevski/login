@@ -13,12 +13,12 @@
 
     <fieldset>
         <legend>Login</legend>
-        <!-- <form> -->
+        <form onsubmit="submitHandler(event)">
             <label for="user-email">Email Address</label><br>
-            <input type="email" id="user-email" name="user-email" required><br>
+            <input type="email" id="user-email" name="user-email" value="admin@yopmail.com"><br>
             <label for="user-password">Password</label><br>
-            <input type="password" id="user-password" name="user-password" minlength="6" required><br><br>
-            <button onclick="showWeather()">Login &#x27A1;</button>
+            <input type="password" id="user-password" name="user-password" value="adminyopmail"><br><br>
+            <button type="submit">Login &#x27A1;</button>
             <br><br>
 
             <div id="weather-container">
@@ -28,12 +28,18 @@
             <div id="message-date-time-container">
 
             </div>
-        <!-- </form> -->
+
+            <div id="errors">
+
+            </div>
+
+            
+        </form>
     </fieldset>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="script.js"></script>
-
 </body>
 
 </html>
