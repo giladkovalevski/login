@@ -2,7 +2,23 @@ const email = "admin@yopmail.com";
 const password = "adminyopmail";
 
 const message = document.getElementById("message-date-time-container");
-message.innerHTML = moment().format('LL');;
+const messageDiv = document.createElement("span");
+const messageDivGreen = document.createElement("span");
+
+const todayMessage = "Today's message: ";
+const todayMessageGreen = "\"in init\"\n";
+
+message.innerText = todayMessage;
+messageDivGreen.innerText = todayMessageGreen;
+messageDivGreen.style.color = "green";
+console.log(message);
+
+const todayDate = "Today's date: " + moment().format('dddd') + " " + moment().format('ll') + "\n";
+const todayTime = "Time now: " + moment().format('LTS');
+messageDiv.innerText = todayDate + todayTime;
+
+message.appendChild(messageDivGreen);
+message.appendChild(messageDiv);
 
 function showWeather() {
 
@@ -28,17 +44,15 @@ function displayWeather(resp) {
     const parsedData = JSON.parse(resp.target.response);
 
     const dailyForecast = parsedData.DailyForecasts;
-    // console.log(parsedData);
 
     if (userEmailValue === email && userPasswordValue === password) {
         for (let i = 0; i < dailyForecast.length; i++) {
-
             const date = dailyForecast[i].Date;
             const dateDiv = document.createElement("span");
-            dateDiv.innerHTML = `\n${date}`;
+            dateDiv.innerHTML = `\n${date}`;// look over again!!!!
             dateDiv.style.color = "blue";
             dateDiv.style.textDecoration = "underline";
-            console.log(dateDiv);
+
             const maxTemp = dailyForecast[i].Temperature.Maximum.Value;
             const minTemp = dailyForecast[i].Temperature.Minimum.Value;
             const day = dailyForecast[i].Day.IconPhrase;
@@ -58,15 +72,13 @@ function displayWeather(resp) {
 }
 
 function submitHandler(event) {
-    
+
     event.preventDefault();
     const userEmail = document.getElementById("user-email");
     const userEmailValue = userEmail.value;
 
     const userPassword = document.getElementById("user-password");
     const userPasswordValue = userPassword.value;
-
-
 
     if (userEmailValue === "" && userPasswordValue.length < 6) {
         let errorsContainer = document.getElementById("errors");
@@ -80,10 +92,6 @@ function submitHandler(event) {
         newDivErrEl.style.color = "red";
         newDivErrEl.innerText = errMessage;
         errorsContainer.appendChild(newDivErrEl);
-        // newDivErrEl.style.color = "red";
-        // newDivErrEl.innerText = `* Email address must be filled in!`;
-
-        // weatherContainer.appendChild(newDivErrEl);
 
     } else if (userEmailValue === "" && userPasswordValue.length >= 6) {
         let errorsContainer = document.getElementById("errors");
@@ -118,29 +126,10 @@ function submitHandler(event) {
         newDivErrEl.style.color = "red";
         newDivErrEl.innerText = errMessage;
         errorsContainer.appendChild(newDivErrEl);
-    }
-    else {
+    } else {
         let errorsContainer = document.getElementById("errors");
         errorsContainer.style.display = "none";
         showWeather();
     }
-
     console.log(userEmailValue + userPasswordValue);
 }
-
-
-
-
-
-
-
-// const dateObj = new Date();
-
-// const days = dateObj.getDay();
-// const month = dateObj.getMonth();
-// const date = dateObj.getDate();
-
-
-
-
-//  document.getElementById("message-date-time-container").innerHTML 
