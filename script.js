@@ -98,8 +98,7 @@ function submitHandler(event) {
         let newDivErrEl = document.createElement("div");
         const errMessage = `Error! Please complete the 
         form!
-        * Email address must be filled in!
-        `;
+        * Email address must be filled in!`;
 
         newDivErrEl.style.color = "red";
         newDivErrEl.innerText = errMessage;
