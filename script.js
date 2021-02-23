@@ -5,20 +5,13 @@ const message = document.getElementById("message-date-time-container");
 const messageDiv = document.createElement("span");
 const messageDivGreen = document.createElement("span");
 
-const todayMessage = "Today's message: ";
-const todayMessageGreen = "\"in init\"\n";
-
-message.innerText = todayMessage;
-messageDivGreen.innerText = todayMessageGreen;
-messageDivGreen.style.color = "green";
-console.log(message);
-
-const todayDate = "Today's date: " + moment().format('dddd') + " " + moment().format('ll') + "\n";
-const todayTime = "Time now: " + moment().format('LTS');
-messageDiv.innerText = todayDate + todayTime;
-
-message.appendChild(messageDivGreen);
-message.appendChild(messageDiv);
+function autoRefresh() {
+    var date = new Date();
+    var time = date.toLocaleTimeString();
+    var d = date.toDateString();
+    document.getElementById('message-date-time-container').innerHTML = `Today's message: "in init" <br> Today's date: ${d} <br>Time now: ${time}`;
+}
+setInterval(autoRefresh, 1000);
 
 function showWeather() {
 
@@ -41,12 +34,20 @@ function displayWeather(resp) {
     const userPassword = document.getElementById("user-password");
     const userPasswordValue = userPassword.value;
 
+    userEmail.value = "";
+    userPassword.value = "";
+
     const parsedData = JSON.parse(resp.target.response);
 
     const dailyForecast = parsedData.DailyForecasts;
 
     if (userEmailValue === email && userPasswordValue === password) {
+
+        const weatherContainer = document.getElementById("weather-container");
+        weatherContainer.innerHTML = "";
+        
         for (let i = 0; i < dailyForecast.length; i++) {
+
             const date = dailyForecast[i].Date;
             const dateDiv = document.createElement("span");
             dateDiv.innerHTML = `\n${date}`;// look over again!!!!
@@ -61,8 +62,7 @@ function displayWeather(resp) {
             const onDisplay = `Max: ${maxTemp}C Min: ${minTemp}C
     Day: ${day} Night: ${night}`;
 
-            let weatherContainer = document.getElementById("weather-container");
-            let newDivEl = document.createElement("p");
+            const newDivEl = document.createElement("p");
             newDivEl.style.margin = "0";
             weatherContainer.appendChild(dateDiv);
             newDivEl.innerText = onDisplay;
@@ -72,10 +72,10 @@ function displayWeather(resp) {
 }
 
 function submitHandler(event) {
-
     event.preventDefault();
     const userEmail = document.getElementById("user-email");
     const userEmailValue = userEmail.value;
+
 
     const userPassword = document.getElementById("user-password");
     const userPasswordValue = userPassword.value;
@@ -130,5 +130,4 @@ function submitHandler(event) {
         errorsContainer.style.display = "none";
         showWeather();
     }
-    console.log(userEmailValue + userPasswordValue);
 }
